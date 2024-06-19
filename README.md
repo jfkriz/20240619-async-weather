@@ -10,11 +10,11 @@ to retrieve the needed data.
 
 ### C3 Weather API Specifics
 
-URL: (https://c3weatherapi.azurewebsites.net/)[https://c3weatherapi.azurewebsites.net/]
+URL: [https://c3weatherapi.azurewebsites.net/](https://c3weatherapi.azurewebsites.net/)
 
-In order to call the API must provide an `api-key` header. Please fill this out with your names or a team name. As you progress through the questions below feel free to add a numeric suffix, but keep the suffix the same for all requests in that question.
+In order to call the API you must provide an `api-key` header. Please fill this out with your names or a team name. As you progress through the questions below feel free to add a numeric suffix, but keep the suffix the same for all requests in that question.
 
-The weather endpoint takes a specific date format YYYY-MM-DD
+The weather endpoint takes a specific date in the format YYYY-MM-DD
 
 Unix Curl: `curl -H "api-key: YOUR-TEAM-NAME" https://c3weatherapi.azurewebsites.net/2020-01-01`
 
@@ -32,7 +32,7 @@ For successful calls the data will look like the following
 }
 ```
 
-You can imaging the complex processing on the backend to retrieve and process weather data. We have all the data from Lunken Airport from 1948-08-01 up to and including 2024-06-07.
+You can imagine the complex processing on the backend to retrieve and process weather data. We have all the data from Lunken Airport from 1948-08-01 up to and including 2024-06-07.
 
 To measure the time it takes for a single call you can do something like this, or using StopWatch or timer functionality in whatever coding language your are using.
 Unix Curl: `time curl -H "api-key: YOUR-TEAM-NAME" https://c3weatherapi.azurewebsites.net/2020-01-01`
