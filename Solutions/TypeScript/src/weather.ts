@@ -4,7 +4,7 @@ import { format } from 'date-fns'
 export class WeatherService {
     private readonly client: Axios
     constructor() {
-        this.client = axios.create({ 
+        this.client = axios.create({
             baseURL: 'https://c3weatherapi.azurewebsites.net',
             headers: {
                 'api-key': 'the-krizzle'
@@ -21,9 +21,13 @@ export class WeatherService {
         const dates = this.getDatesInRange(start, endInclusive);
         const weatherResponses: Array<WeatherResponse> = [];
 
-        for (const date of dates) {
-            const resp = await this.getWeatherForDate(date);
-            weatherResponses.push(resp);
+        for (let i = 0; i < dates.length; i += 10) {
+            const chunk = dates.slice(i, i + 10);
+            // Map each date in the chunk to a promise calling getWeatherForDate
+            const promises = chunk.map(date => this.getWeatherForDate(date));
+            // Await all promises in the chunk and then push the results into weatherResponses
+            const results = await Promise.all(promises);
+            weatherResponses.push(...results);
         }
 
         return weatherResponses;
@@ -40,14 +44,6 @@ export class WeatherService {
         }
 
         return dates;
-    }
-
-    private chunk<T>(array: T[], size: number): T[][] {
-        const arr: T[][] = []
-        for (let i = 0, j = array.length; i < j; i += size) {
-            arr.push(array.slice(i, i + size));
-        }
-        return arr
     }
 }
 
